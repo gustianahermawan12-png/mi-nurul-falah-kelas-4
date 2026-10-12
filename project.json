@@ -1,0 +1,22 @@
+{
+  "overview": "Aplikasi mobile-first untuk memantau nilai, kehadiran, tabungan, dan infak siswa MI Nurul Falah, dengan akses guru penuh dan akses orang tua read-only.",
+  "features": [
+    "Login guru dan orang tua dengan peran berbeda",
+    "Dasbor orang tua: profil siswa dan kartu ringkasan",
+    "Tab nilai akademik dengan filter semester dan rincian komponen",
+    "Rekap kehadiran dan pengajuan izin dengan bukti foto",
+    "Catatan tabungan dan infak siswa",
+    "Panel guru untuk mengelola siswa, kelas, mapel, nilai, kehadiran, dan keuangan",
+    "Verifikasi pengajuan izin oleh guru",
+    "Kategori nilai kustom dinamis"
+  ],
+  "category": "education",
+  "tags": [
+    "school",
+    "grades",
+    "attendance",
+    "finance",
+    "mobile-first"
+  ],
+  "last_updated": "2026-10-11T23:38:46.220Z"
+}

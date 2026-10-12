@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 300 700;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 1000;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 800;
+}
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body: "DM Sans", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --radius: 1rem;
+
+    /* Islamic green palette — light mode */
+    --background: 0.975 0.008 150;
+    --foreground: 0.21 0.03 158;
+    --card: 0.995 0.003 150;
+    --card-foreground: 0.21 0.03 158;
+    --popover: 0.995 0.003 150;
+    --popover-foreground: 0.21 0.03 158;
+
+    --primary: 0.45 0.11 156;
+    --primary-foreground: 0.98 0.01 150;
+
+    --secondary: 0.93 0.02 150;
+    --secondary-foreground: 0.3 0.04 158;
+    --muted: 0.94 0.014 150;
+    --muted-foreground: 0.5 0.025 158;
+
+    --accent: 0.62 0.13 152;
+    --accent-foreground: 0.16 0.03 152;
+
+    --gold: 0.72 0.13 78;
+    --gold-foreground: 0.22 0.03 78;
+
+    --destructive: 0.55 0.21 27;
+    --destructive-foreground: 0.98 0.01 27;
+
+    --success: 0.58 0.15 152;
+    --success-foreground: 0.98 0.01 152;
+    --warning: 0.74 0.14 78;
+    --warning-foreground: 0.22 0.03 78;
+
+    --border: 0.9 0.014 150;
+    --input: 0.9 0.014 150;
+    --ring: 0.45 0.11 156;
+
+    --chart-1: 0.5 0.13 156;
+    --chart-2: 0.68 0.12 170;
+    --chart-3: 0.72 0.13 78;
+    --chart-4: 0.6 0.14 140;
+    --chart-5: 0.55 0.2 27;
+
+    --sidebar: 0.96 0.012 150;
+    --sidebar-foreground: 0.21 0.03 158;
+    --sidebar-primary: 0.45 0.11 156;
+    --sidebar-primary-foreground: 0.98 0.01 150;
+    --sidebar-accent: 0.93 0.02 150;
+    --sidebar-accent-foreground: 0.3 0.04 158;
+    --sidebar-border: 0.9 0.014 150;
+    --sidebar-ring: 0.45 0.11 156;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.42 0.11 158) 0%,
+      oklch(0.53 0.12 150) 100%
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.985 0.008 150) 0%,
+      oklch(0.955 0.012 150) 100%
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    /* Islamic green palette — dark mode, deep emerald night */
+    --background: 0.17 0.02 158;
+    --foreground: 0.94 0.012 150;
+    --card: 0.21 0.024 158;
+    --card-foreground: 0.94 0.012 150;
+    --popover: 0.23 0.026 158;
+    --popover-foreground: 0.94 0.012 150;
+
+    --primary: 0.72 0.13 152;
+    --primary-foreground: 0.16 0.03 158;
+
+    --secondary: 0.25 0.028 158;
+    --secondary-foreground: 0.88 0.012 150;
+    --muted: 0.25 0.028 158;
+    --muted-foreground: 0.62 0.02 150;
+
+    --accent: 0.68 0.14 152;
+    --accent-foreground: 0.16 0.03 152;
+
+    --gold: 0.76 0.13 80;
+    --gold-foreground: 0.18 0.03 80;
+
+    --destructive: 0.62 0.19 27;
+    --destructive-foreground: 0.16 0.02 27;
+
+    --success: 0.7 0.15 152;
+    --success-foreground: 0.16 0.03 152;
+    --warning: 0.78 0.13 80;
+    --warning-foreground: 0.18 0.03 80;
+
+    --border: 0.3 0.026 158;
+    --input: 0.3 0.026 158;
+    --ring: 0.72 0.13 152;
+
+    --chart-1: 0.7 0.14 152;
+    --chart-2: 0.68 0.12 170;
+    --chart-3: 0.76 0.13 80;
+    --chart-4: 0.64 0.13 140;
+    --chart-5: 0.65 0.19 27;
+
+    --sidebar: 0.2 0.022 158;
+    --sidebar-foreground: 0.94 0.012 150;
+    --sidebar-primary: 0.72 0.13 152;
+    --sidebar-primary-foreground: 0.16 0.03 158;
+    --sidebar-accent: 0.25 0.028 158;
+    --sidebar-accent-foreground: 0.88 0.012 150;
+    --sidebar-border: 0.3 0.026 158;
+    --sidebar-ring: 0.72 0.13 152;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.4 0.1 160) 0%,
+      oklch(0.55 0.13 150) 100%
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.19 0.022 158) 0%,
+      oklch(0.22 0.024 158) 100%
+    );
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Tabular numbers for grades and finance tables */
+  .nums-tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* Safe-area padding for bottom tab bar on phones */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}

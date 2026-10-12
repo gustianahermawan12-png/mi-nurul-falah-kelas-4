@@ -1,0 +1,266 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type AttendanceId__91187254 = Nat;
+type AttendanceRecord__213640342 =
+  {
+    date : Text;
+    id : Nat;
+    note : Text;
+    status : AttendanceStatus__177777111;
+    studentId : Nat
+  };
+type AttendanceRecord__699091857 =
+  {
+    date : Text;
+    id : AttendanceId__91187254;
+    note : Text;
+    status : AttendanceStatus__1042496195;
+    studentId : StudentId__585118929
+  };
+type AttendanceStatus__1042496195 = {#alpa; #hadir; #izin; #sakit};
+type AttendanceStatus__177777111 = {#alpa; #hadir; #izin; #sakit};
+type CategoryId__14729845 = Nat;
+type ClassId__805055241 = Nat;
+type Class__44907486 = {id : ClassId__805055241; name : Text};
+type Class__751167850 = {id : Nat; name : Text};
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type ExternalBlob__220559234 = Blob;
+type GradeCategory__190741188 =
+  {id : Nat; name : Text; semester : Semester__580553378};
+type GradeCategory__214619749 =
+  {id : CategoryId__14729845; name : Text; semester : Semester__504252244};
+type Grade__287079990 =
+  {
+    categoryId : CategoryId__14729845;
+    id : Nat;
+    score : Nat;
+    studentId : StudentId__585118929;
+    subjectId : SubjectId__402408784
+  };
+type Grade__923439414 =
+  {categoryId : Nat; id : Nat; score : Nat; studentId : Nat; subjectId : Nat};
+type InfaqId__985751863 = Nat;
+type InfaqTransaction__717758467 =
+  {
+    amount : Nat;
+    date : Text;
+    id : InfaqId__985751863;
+    note : Text;
+    studentId : StudentId__585118929
+  };
+type InfaqTransaction__881460422 =
+  {amount : Nat; date : Text; id : Nat; note : Text; studentId : Nat};
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type LeaveRequestId__1047857620 = Nat;
+type LeaveRequestStatus__77511052 = {#disetujui; #ditolak; #menunggu};
+type LeaveRequestStatus__999650767 = {#disetujui; #ditolak; #menunggu};
+type LeaveRequest__511484049 =
+  {
+    createdAt : Nat;
+    date : Text;
+    id : Nat;
+    proof : ?Blob;
+    reason : Text;
+    requestStatus : LeaveRequestStatus__999650767;
+    status : AttendanceStatus__177777111;
+    studentId : Nat;
+    teacherNote : Text
+  };
+type LeaveRequest__960500057 =
+  {
+    createdAt : Timestamp__301639476;
+    date : Text;
+    id : LeaveRequestId__1047857620;
+    proof : ?ExternalBlob__220559234;
+    reason : Text;
+    requestStatus : LeaveRequestStatus__77511052;
+    status : AttendanceStatus__1042496195;
+    studentId : StudentId__585118929;
+    teacherNote : Text
+  };
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__705149831 =
+  {
+    accessControlState : AccessControlState__201339279;
+    attendance : Map__230067015<Nat, AttendanceRecord__213640342>;
+    classes : Map__230067015<Nat, Class__751167850>;
+    counters :
+      {
+        var nextAttendanceId : Nat;
+        var nextCategoryId : Nat;
+        var nextClassId : Nat;
+        var nextGradeId : Nat;
+        var nextInfaqId : Nat;
+        var nextLeaveRequestId : Nat;
+        var nextSavingsId : Nat;
+        var nextStudentId : Nat;
+        var nextSubjectId : Nat
+      };
+    gradeCategories : Map__230067015<Nat, GradeCategory__190741188>;
+    grades : Map__230067015<Nat, Grade__923439414>;
+    infaq : Map__230067015<Nat, InfaqTransaction__881460422>;
+    leaveRequests : Map__230067015<Nat, LeaveRequest__511484049>;
+    savings : Map__230067015<Nat, SavingsTransaction__658250276>;
+    sessions : Map__230067015<Text, Session__599542611>;
+    students : Map__230067015<Nat, Student__139575341>;
+    subjects : Map__230067015<Nat, Subject__38177178>;
+    teacherCredentials : TeacherCredentials__1010698637
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type OldActor__625272489 = {};
+type SavingsDirection__1064545475 = {#keluar; #masuk};
+type SavingsDirection__863073186 = {#keluar; #masuk};
+type SavingsId__856065064 = Nat;
+type SavingsTransaction__520528125 =
+  {
+    amount : Nat;
+    date : Text;
+    direction : SavingsDirection__1064545475;
+    id : SavingsId__856065064;
+    note : Text;
+    studentId : StudentId__585118929
+  };
+type SavingsTransaction__658250276 =
+  {
+    amount : Nat;
+    date : Text;
+    direction : SavingsDirection__863073186;
+    id : Nat;
+    note : Text;
+    studentId : Nat
+  };
+type Semester__504252244 = {#semester1; #semester2};
+type Semester__580553378 = {#semester1; #semester2};
+type Session__599542611 =
+  {
+    createdAt : Nat;
+    kind : UserKind__775920634;
+    studentId : ?Nat;
+    token : Text
+  };
+type Session__71599859 =
+  {
+    createdAt : Timestamp__301639476;
+    kind : UserKind__746656006;
+    studentId : ?StudentId__585118929;
+    token : Text
+  };
+type StudentId__585118929 = Nat;
+type Student__139575341 =
+  {
+    classId : Nat;
+    id : Nat;
+    isActive : Bool;
+    name : Text;
+    nisn : Text;
+    parentPassword : Text;
+    parentPhone : Text
+  };
+type Student__26715999 =
+  {
+    classId : ClassId__805055241;
+    id : StudentId__585118929;
+    isActive : Bool;
+    name : Text;
+    nisn : Text;
+    parentPassword : Text;
+    parentPhone : Text
+  };
+type SubjectId__402408784 = Nat;
+type Subject__38177178 = {id : Nat; name : Text};
+type Subject__822239671 = {id : SubjectId__402408784; name : Text};
+type TeacherCredentials__1010698637 = {password : Text; username : Text};
+type Timestamp__301639476 = Nat;
+type UserKind__746656006 = {#guru; #orangTua};
+type UserKind__775920634 = {#guru; #orangTua};
+type UserRole__91647283 = {#admin; #guest; #user};
+{
+  "20261009_000000" : OldActor__625272489 -> NewActor__705149831
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable attendance :
+    {
+      var root :
+        Node__204828119<AttendanceId__91187254, AttendanceRecord__699091857>;
+      var size : Nat__227979830
+    };
+  stable classes :
+    {
+      var root : Node__204828119<ClassId__805055241, Class__44907486>;
+      var size : Nat__227979830
+    };
+  stable counters :
+    {
+      var nextAttendanceId : Nat;
+      var nextCategoryId : Nat;
+      var nextClassId : Nat;
+      var nextGradeId : Nat;
+      var nextInfaqId : Nat;
+      var nextLeaveRequestId : Nat;
+      var nextSavingsId : Nat;
+      var nextStudentId : Nat;
+      var nextSubjectId : Nat
+    };
+  stable gradeCategories :
+    {
+      var root :
+        Node__204828119<CategoryId__14729845, GradeCategory__214619749>;
+      var size : Nat__227979830
+    };
+  stable grades :
+    {
+      var root : Node__204828119<Nat, Grade__287079990>;
+      var size : Nat__227979830
+    };
+  stable infaq :
+    {
+      var root :
+        Node__204828119<InfaqId__985751863, InfaqTransaction__717758467>;
+      var size : Nat__227979830
+    };
+  stable leaveRequests :
+    {
+      var root :
+        Node__204828119<LeaveRequestId__1047857620, LeaveRequest__960500057>;
+      var size : Nat__227979830
+    };
+  stable savings :
+    {
+      var root :
+        Node__204828119<SavingsId__856065064, SavingsTransaction__520528125>;
+      var size : Nat__227979830
+    };
+  stable sessions :
+    {
+      var root : Node__204828119<Text, Session__71599859>;
+      var size : Nat__227979830
+    };
+  stable students :
+    {
+      var root : Node__204828119<StudentId__585118929, Student__26715999>;
+      var size : Nat__227979830
+    };
+  stable subjects :
+    {
+      var root : Node__204828119<SubjectId__402408784, Subject__822239671>;
+      var size : Nat__227979830
+    };
+  stable teacherCredentials : {password : Text; username : Text}
+};

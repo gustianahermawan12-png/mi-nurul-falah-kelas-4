@@ -1,0 +1,319 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserKind = 
+ variant {
+   guru;
+   orangTua;
+ };
+type Timestamp = nat;
+type TeacherCredentials = 
+ record {
+   password: text;
+   username: text;
+ };
+type SubjectId = nat;
+type SubjectGradeSummary = 
+ record {
+   average: nat;
+   components: vec GradeView;
+   semester: Semester;
+   subjectId: SubjectId;
+   subjectName: text;
+ };
+type Subject = 
+ record {
+   id: SubjectId;
+   name: text;
+ };
+type StudentView = 
+ record {
+   classId: ClassId;
+   className: text;
+   id: StudentId;
+   isActive: bool;
+   name: text;
+   nisn: text;
+ };
+type StudentInput = 
+ record {
+   classId: ClassId;
+   isActive: bool;
+   name: text;
+   nisn: text;
+   parentPassword: text;
+   parentPhone: text;
+ };
+type StudentId = nat;
+type Session = 
+ record {
+   createdAt: Timestamp;
+   kind: UserKind;
+   studentId: opt StudentId;
+   token: text;
+ };
+type Semester = 
+ variant {
+   semester1;
+   semester2;
+ };
+type SavingsTransaction = 
+ record {
+   amount: nat;
+   date: text;
+   direction: SavingsDirection;
+   id: SavingsId;
+   note: text;
+   studentId: StudentId;
+ };
+type SavingsSummary = 
+ record {
+   balance: nat;
+   totalIn: nat;
+   totalOut: nat;
+   transactions: vec SavingsTransaction;
+ };
+type SavingsInput = 
+ record {
+   amount: nat;
+   date: text;
+   direction: SavingsDirection;
+   note: text;
+   studentId: StudentId;
+ };
+type SavingsId = nat;
+type SavingsDirection = 
+ variant {
+   keluar;
+   masuk;
+ };
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type LoginResult = 
+ variant {
+   err: text;
+   ok: Session;
+ };
+type LeaveRequestStatus = 
+ variant {
+   disetujui;
+   ditolak;
+   menunggu;
+ };
+type LeaveRequestInput = 
+ record {
+   date: text;
+   proof: opt ExternalBlob;
+   reason: text;
+   status: AttendanceStatus;
+   studentId: StudentId;
+ };
+type LeaveRequestId = nat;
+type LeaveRequest = 
+ record {
+   createdAt: Timestamp;
+   date: text;
+   id: LeaveRequestId;
+   proof: opt ExternalBlob;
+   reason: text;
+   requestStatus: LeaveRequestStatus;
+   status: AttendanceStatus;
+   studentId: StudentId;
+   teacherNote: text;
+ };
+type InfaqTransaction = 
+ record {
+   amount: nat;
+   date: text;
+   id: InfaqId;
+   note: text;
+   studentId: StudentId;
+ };
+type InfaqInput = 
+ record {
+   amount: nat;
+   date: text;
+   note: text;
+   studentId: StudentId;
+ };
+type InfaqId = nat;
+type GradeView = 
+ record {
+   categoryId: CategoryId;
+   categoryName: text;
+   id: nat;
+   score: nat;
+   semester: Semester;
+   subjectId: SubjectId;
+   subjectName: text;
+ };
+type GradeInput = 
+ record {
+   categoryId: CategoryId;
+   score: nat;
+   studentId: StudentId;
+   subjectId: SubjectId;
+ };
+type GradeCategory = 
+ record {
+   id: CategoryId;
+   name: text;
+   semester: Semester;
+ };
+type ExternalBlob = blob;
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type ClassId = nat;
+type Class = 
+ record {
+   id: ClassId;
+   name: text;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type CategoryId = nat;
+type AttendanceSummary = 
+ record {
+   alpa: nat;
+   hadir: nat;
+   izin: nat;
+   sakit: nat;
+ };
+type AttendanceStatus = 
+ variant {
+   alpa;
+   hadir;
+   izin;
+   sakit;
+ };
+type AttendanceRecord = 
+ record {
+   date: text;
+   id: AttendanceId;
+   note: text;
+   status: AttendanceStatus;
+   studentId: StudentId;
+ };
+type AttendanceId = nat;
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  addCategory: (name: text, semester: Semester) -> (GradeCategory);
+  addClass: (name: text) -> (Class);
+  addInfaq: (input: InfaqInput) -> (InfaqTransaction);
+  addSavings: (input: SavingsInput) -> (SavingsTransaction);
+  addStudent: (input: StudentInput) -> (StudentView);
+  addSubject: (name: text) -> (Subject);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  createLeaveRequest: (input: LeaveRequestInput) -> (LeaveRequest);
+  deleteAttendance: (id: AttendanceId) -> ();
+  deleteCategory: (id: CategoryId) -> ();
+  deleteClass: (id: ClassId) -> ();
+  deleteGrade: (id: nat) -> ();
+  deleteInfaq: (id: InfaqId) -> ();
+  deleteSavings: (id: SavingsId) -> ();
+  deleteStudent: (id: StudentId) -> ();
+  deleteSubject: (id: SubjectId) -> ();
+  execute: (qJson: text) -> (Result) query;
+  getApiDoc: () -> (text) query;
+  getAttendanceSummary: (studentId: StudentId) -> (AttendanceSummary) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getInfaqTotal: (studentId: StudentId) -> (nat) query;
+  getOverallAverage: (studentId: StudentId) -> (nat) query;
+  getSession: (token: text) -> (opt Session) query;
+  getStudent: (id: StudentId) -> (opt StudentView) query;
+  getTeacherCredentials: () -> (TeacherCredentials) query;
+  isCallerAdmin: () -> (bool) query;
+  listAllLeaveRequests: () -> (vec LeaveRequest) query;
+  listAttendance: (studentId: StudentId) -> (vec AttendanceRecord) query;
+  listCategories: () -> (vec GradeCategory) query;
+  listClasses: () -> (vec Class) query;
+  listGrades: (studentId: StudentId, semester: Semester) ->
+   (vec GradeView) query;
+  listInfaq: (studentId: StudentId) -> (vec InfaqTransaction) query;
+  listLeaveRequests: (studentId: StudentId) -> (vec LeaveRequest) query;
+  listSavings: (studentId: StudentId) -> (SavingsSummary) query;
+  listStudents: () -> (vec StudentView) query;
+  listSubjectSummaries: (studentId: StudentId, semester: Semester) ->
+   (vec SubjectGradeSummary) query;
+  listSubjects: () -> (vec Subject) query;
+  loginParent: (identifier: text, password: text) -> (LoginResult);
+  loginTeacher: (username: text, password: text) -> (LoginResult);
+  logout: (token: text) -> ();
+  reviewLeaveRequest: (id: LeaveRequestId, status: LeaveRequestStatus,
+   teacherNote: text) -> ();
+  schema: () -> (text) query;
+  setAttendance: (studentId: StudentId, date: text, status: AttendanceStatus,
+   note: text) -> (AttendanceRecord);
+  setGrade: (input: GradeInput) -> (GradeView);
+  updateCategory: (id: CategoryId, name: text, semester: Semester) -> ();
+  updateClass: (id: ClassId, name: text) -> ();
+  updateStudent: (id: StudentId, input: StudentInput) -> ();
+  updateSubject: (id: SubjectId, name: text) -> ();
+}
